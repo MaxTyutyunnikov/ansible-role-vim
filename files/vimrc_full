@@ -84,7 +84,7 @@ set sidescroll=1
 
 call plug#begin()
 
-Plug 'ycm-core/YouCompleteMe', { 'do': './install.py' }
+Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --go-complete' }
 Plug 'morhetz/gruvbox'
 
 Plug 'vim-airline/vim-airline'
