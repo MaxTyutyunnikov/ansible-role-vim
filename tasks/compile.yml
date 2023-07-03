@@ -38,8 +38,8 @@
     - make distclean
     - >
       ./configure
-      --prefix={{configure_prefix}}
-      --with-features={{configure_with_features}}
+      --prefix={{ configure_prefix }}
+      --with-features={{ configure_with_features }}
       --with-x
       --enable-gui=auto
       --enable-pythoninterp
@@ -49,6 +49,9 @@
     - make install
   tags:
     - compile
+  become: yes
+  become_method: sudo
+  become_user: root
 
 - name: Unistall VIM if it is installed from the repository
   become: yes

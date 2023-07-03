@@ -94,6 +94,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'preservim/nerdtree'
 Plug 'vim-syntastic/syntastic'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'pearofducks/ansible-vim', { 'do': './UltiSnips/generate.sh' }
 
 " Initialize plugin system
 call plug#end()
@@ -109,6 +111,9 @@ let g:airline#extensions#tabline#enabled = 1
 " ycm-core/YouCompleteMe
 let g:ycm_python_binary_path = 'python3'
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+" vim-go
+let g:go_bin_path = $HOME."/.go/bin"
 
 " vim-syntastic/syntastic
 set statusline+=%#warningmsg#

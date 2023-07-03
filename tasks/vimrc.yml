@@ -6,11 +6,11 @@
   tags:
     - vimrc
 
-- name: Ensures {{config_root}} dir exists
-  file: 
-    path: "{{config_root}}"
+- name: Ensures {{ config_root }} dir exists
+  file:
+    path: "{{ config_root }}"
     state: directory
-    recurse: yes
+    recurse: true
   tags:
     - vimrc
 
@@ -28,25 +28,25 @@
 
 - name: copy the minimal vimrc if not exists
   copy:
-    src: "{{config_src}}_minimal"
-    dest: "{{config_dest}}"
-    force: no
+    src: "{{ config_src }}_minimal"
+    dest: "{{ config_dest }}"
+    force: false
   tags:
     - vimrc
   when: vimrc_mode == "minimal"
 
 - name: copy the full vimrc if not exists
   copy:
-    src: "{{config_src}}_full"
-    dest: "{{config_dest}}"
-    force: no
+    src: "{{ config_src }}_full"
+    dest: "{{ config_dest }}"
+    force: false
   tags:
     - vimrc
   when: vimrc_mode == "full"
 
 - name: slurp config file content from remote
   slurp:
-    src: "{{config_dest}}"
+    src: "{{ config_dest }}"
   register: slurp_task
   tags:
     - plug
@@ -54,7 +54,7 @@
 
 - name: set fact for config file content
   set_fact:
-    vimrc: "{{slurp_task.content|b64decode}}"
+    vimrc: "{{ slurp_task.content|b64decode }}"
   tags:
     - plug
     - vimrc

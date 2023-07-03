@@ -7,14 +7,15 @@
 
 - name: copy requirements to remote server
   copy:
-    src: "{{requirements_path}}"
-    dest: "{{requirements_dest}}"
+    src: "{{ requirements_path }}"
+    dest: "{{ requirements_dest }}"
   tags:
     - vimrc
 
 - name: pip install -r requirements
   become: yes
   pip:
-    requirements: "{{requirements_dest}}"
+    requirements: "{{ requirements_dest }}"
+    extra_args: "--break-system-packages"
   tags:
     - vimrc

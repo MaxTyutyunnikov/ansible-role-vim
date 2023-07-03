@@ -1,5 +1,18 @@
 ---
 
+- name: install
+  apt:
+    name:
+      - vim-gtk3
+  become: true
+  become_method: sudo
+  become_user: root
+
+- name: check vim exist
+  stat:
+    path: "{{ configure_prefix }}/bin/vim"
+  register: vim_stat
+
 - name: display compile message
   debug:
     msg:
@@ -15,11 +28,13 @@
       - '***********************************************************'
   tags:
     - compile
+  when: not vim_stat.stat.exists
 
 - name: include task from comile.yml
   include_tasks: compile.yml
   tags:
     - compile
+  when: not vim_stat.stat.exists
 
 - name: display vimrc message
   debug:
