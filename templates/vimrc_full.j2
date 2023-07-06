@@ -1,3 +1,5 @@
+set rtp+={{ config_root }}
+
 "Turn on syntax highlighting.
 syntax on
 
@@ -88,7 +90,7 @@ set sidescroll=1
 
 " ================ Plugins ======================
 
-call plug#begin()
+call plug#begin('{{ config_root }}/plugins')
 
 Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --go-complete --all' }
 Plug 'morhetz/gruvbox'
@@ -103,10 +105,8 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'pearofducks/ansible-vim', { 'do': './UltiSnips/generate.sh' }
 Plug 'pangloss/vim-javascript'
-Plug 'christoomey/vim-system-copy'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
-" Plug 'garbas/vim-snipmate'
 Plug 'grvcoelho/vim-javascript-snippets'
 Plug 'preservim/nerdcommenter'
 
@@ -117,8 +117,8 @@ set nocompatible              " be iMproved, required
 filetype off
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/plugged/Vundle.vim
-call vundle#begin()
+set rtp+={{ config_root }}/plugins/Vundle.vim
+call vundle#begin('{{ config_root }}/plugins')
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
@@ -141,6 +141,20 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Plugin 'ascenator/L9', {'name': 'newL9'}
 
 Plugin 'w0rp/ale'
+Plugin 'christoomey/vim-system-copy'
+" Plugin 'garbas/vim-snipmate'
+
+"---------------=== Languages support ===-------------
+" --- Python ---
+Plugin 'klen/python-mode'	        " Python mode (docs, refactor, lints, highlighting, run and ipdb and more)
+Plugin 'davidhalter/jedi-vim' 		" Jedi-vim autocomplete plugin
+Plugin 'mitsuhiko/vim-jinja'		" Jinja support for vim
+Plugin 'mitsuhiko/vim-python-combined'  " Combined Python 2/3 for Vim
+Plugin 'vim-scripts/indentpython.vim'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'nvie/vim-flake8'
+Plugin 'jnurmine/Zenburn'
+Plugin 'altercation/vim-colors-solarized'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -210,7 +224,7 @@ nnoremap <Leader>= m'gg=G`'
 nnoremap <Leader>; m'A;<ESC>`'
 
 " Source vimrc with <Leader>vc
-nnoremap <Leader>vc :source ~/.vim/vimrc<CR>:echo "Reloaded .vimrc"<CR>
+nnoremap <Leader>vc :source {{ config_root }}/vimrc<CR>:echo "Reloaded .vimrc"<CR>
 
 " Clear trailing whitespace with <Leader>cw
 nnoremap <Leader>cw :%s/\s\+$//g<CR>:nohlsearch<CR>
@@ -259,3 +273,18 @@ let g:NERDTrimTrailingWhitespace = 1
 
 " Enable NERDCommenterToggle to check all selected lines is commented or not 
 let g:NERDToggleCheckAllLines = 1
+
+au BufNewFile,BufRead *.py
+    \ set tabstop=4
+    \ set softtabstop=4
+    \ set shiftwidth=4
+    \ set textwidth=79
+    \ set expandtab
+    \ set autoindent
+    \ set fileformat=unix
+
+au BufNewFile,BufRead *.js, *.html, *.css
+    \ set tabstop=2
+    \ set softtabstop=2
+    \ set shiftwidth=2
+

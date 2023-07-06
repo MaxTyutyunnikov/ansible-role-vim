@@ -4,9 +4,23 @@
   apt:
     name:
       - vim-gtk3
+      - wl-clipboard
+      - xsel
   become: true
   become_method: sudo
   become_user: root
+
+- name: install pip
+  pip:
+    name:
+      - pyflakes
+      - pep8
+      - pylint
+      - ipython
+    extra_args: "{{ '--break-system-packages' if (((ansible_distribution|lower) == 'debian') and ((ansible_distribution_version|int) in [9, 10, 11, 12])) else '' }}"
+  become: true
+  become_user: root
+  become_method: sudo
 
 - name: check vim exist
   stat:

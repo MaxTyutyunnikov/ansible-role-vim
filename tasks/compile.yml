@@ -30,10 +30,9 @@
     - compile
 
 - name: config, compile and install vim
-  become: yes
-  command: "{{item}}"
+  command: "{{ item }}"
   args:
-    chdir: "{{git_dest}}"
+    chdir: "{{ git_dest }}"
   loop:
     - make distclean
     - >
@@ -60,4 +59,3 @@
     state: absent
   tags:
     - compile
-

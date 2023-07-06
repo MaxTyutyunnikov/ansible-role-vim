@@ -15,6 +15,6 @@ requirements_path: files/requirements.txt
 
 config_root: "~/.vim"
 # change this to your own vimrc if you like
-config_src: "files/vimrc"
+config_src: "templates/vimrc"
 config_dest: "{{config_root}}/vimrc"
 vimplug_dest_path: "{{config_root}}/autoload"

@@ -27,19 +27,19 @@
     - vimrc
 
 - name: copy the minimal vimrc if not exists
-  copy:
-    src: "{{ config_src }}_minimal"
+  template:
+    src: "{{ config_src }}_minimal.j2"
     dest: "{{ config_dest }}"
-    force: false
+    #    force: false
   tags:
     - vimrc
   when: vimrc_mode == "minimal"
 
 - name: copy the full vimrc if not exists
-  copy:
-    src: "{{ config_src }}_full"
+  template:
+    src: "{{ config_src }}_full.j2"
     dest: "{{ config_dest }}"
-    force: false
+    #    force: false
   tags:
     - vimrc
   when: vimrc_mode == "full"
@@ -59,10 +59,10 @@
     - plug
     - vimrc
 
-- debug: var=vimrc
-  tags:
-    - plug
-    - vimrc
+  # - debug: var=vimrc
+  #   tags:
+  #     - plug
+  #     - vimrc
 
 - name: include task from vimPlug.yml
   include_tasks: vimPlug.yml

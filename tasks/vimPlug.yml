@@ -4,21 +4,21 @@
   file:
     path: "{{ vimplug_dest_path}}"
     state: directory
-    recurse: yes
+    recurse: true
   tags:
     - plug
     - vimrc
 
-- name: Get the vim Plug 
+- name: Get the vim Plug
   get_url:
     url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    dest:  '{{vimplug_dest_path}}/plug.vim'
+    dest: '{{vimplug_dest_path}}/plug.vim'
   tags:
     - plug
     - vimrc
 
 - name: Run vimPlug install
-  shell: vim -c ":PlugInstall gruvbox syntastic nerdtree" -c q -c q 
+  shell: vim -c ":PlugInstall gruvbox syntastic nerdtree" -c q -c q
   tags:
     - plug
     - vimrc
