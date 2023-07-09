@@ -82,6 +82,7 @@
       - '*** Things left to do:                                  ***'
       - '***   - import your vimrc settings if you have          ***'
       - '***   - run :PlugInstall to install all the plugins     ***'
+      - '***   - run "vim +PluginInstall +quitall" to install all the plugins     ***'
       - '***                                                     ***'
       - '***********************************************************'
       - '***********************************************************'
