@@ -1,3 +1,0 @@
-[submodule "vim-python-ide"]
-	path = vim-python-ide
-	url = git@github.com:MaxTyutyunnikov/vim-python-ide.git
