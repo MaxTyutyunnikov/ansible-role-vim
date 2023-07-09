@@ -1,7 +1,7 @@
 ---
 
 # minimal, full
-vimrc_mode : "full"
+vimrc_mode: "full"
 
 git_repo: 'https://github.com/vim/vim.git'
 git_version: master
@@ -18,3 +18,4 @@ config_root: "~/.vim"
 config_src: "templates/vimrc"
 config_dest: "{{config_root}}/vimrc"
 vimplug_dest_path: "{{config_root}}/autoload"
+config_filename: ""

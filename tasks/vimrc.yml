@@ -30,21 +30,27 @@
   template:
     src: "{{ config_src }}_minimal.j2"
     dest: "{{ config_dest }}"
-    #    force: false
   tags:
     - vimrc
-  when: vimrc_mode == "minimal"
+  when: (vimrc_mode == "minimal") and (config_filename is undefined) and (config_filename == "")
 
 - name: copy the full vimrc if not exists
   template:
     src: "{{ config_src }}_full.j2"
     dest: "{{ config_dest }}"
-    #    force: false
   tags:
     - vimrc
-  when: vimrc_mode == "full"
+  when: (vimrc_mode == "full") and (config_filename is undefined) and (config_filename == "")
 
-- name: slurp config file content from remote
+- name: copy vimrc
+  template:
+    src: "{{ config_filename }}"
+    dest: "{{ config_dest }}"
+  tags:
+    - vimrc
+  when: (config_filename is defined) and (config_filename != "")
+
+- name: get vimrc
   slurp:
     src: "{{ config_dest }}"
   register: slurp_task
@@ -58,11 +64,6 @@
   tags:
     - plug
     - vimrc
-
-  # - debug: var=vimrc
-  #   tags:
-  #     - plug
-  #     - vimrc
 
 - name: include task from vimPlug.yml
   include_tasks: vimPlug.yml
