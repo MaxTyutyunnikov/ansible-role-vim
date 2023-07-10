@@ -18,4 +18,4 @@ config_root: "~/.vim"
 config_src: "templates/vimrc"
 config_dest: "{{config_root}}/vimrc"
 vimplug_dest_path: "{{config_root}}/autoload"
-config_filename: ""
+config_filenames: []

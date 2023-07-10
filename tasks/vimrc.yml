@@ -32,7 +32,7 @@
     dest: "{{ config_dest }}"
   tags:
     - vimrc
-  when: (vimrc_mode == "minimal") and (config_filename is undefined) and (config_filename == "")
+  when: (vimrc_mode == "minimal") and (config_filenames is undefined) and (config_filenames == [])
 
 - name: copy the full vimrc if not exists
   template:
@@ -40,15 +40,16 @@
     dest: "{{ config_dest }}"
   tags:
     - vimrc
-  when: (vimrc_mode == "full") and (config_filename is undefined) and (config_filename == "")
+  when: (vimrc_mode == "full") and (config_filenames is undefined) and (config_filenames == [])
 
 - name: copy vimrc
   template:
-    src: "{{ config_filename }}"
-    dest: "{{ config_dest }}"
+    src: "{{ item }}"
+    dest: "{{ config_dest|dirname }}/{{ 'vimrc' if ('vimrc' in item ) else (item|basename|regex_replace('\\.j2','')) }}"
   tags:
     - vimrc
-  when: (config_filename is defined) and (config_filename != "")
+  with_items: "{{ config_filenames }}"
+  when: (config_filenames is defined) and (config_filenames != [])
 
 - name: get vimrc
   slurp:
