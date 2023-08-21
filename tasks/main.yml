@@ -3,7 +3,7 @@
 - name: install
   apt:
     name:
-      - vim-gtk3
+#      - vim-gtk3
       - wl-clipboard
       - xsel
   become: true
